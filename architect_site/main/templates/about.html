@@ -1,0 +1,448 @@
+<!-- templates/main/home.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Architect Studio | About</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* General Navbar Styles */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            margin-left: 20px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f8f9fa;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Optional scroll background effect */
+        .navbar.scrolled {
+            background-color: #000 !important;
+        }
+
+        /* About Page Styles */
+        .about-header {
+            background: url("{% static 'images/about-header.jpg' %}") no-repeat center center;
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .about-header a {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            background-color: #f8f9fa;
+            color: #333;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .about-header a:hover {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-bg {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        .mission h3, .location h3, .owner h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .mission p, .location p, .owner p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Card Layout for Owner Profile */
+        .owner-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 15px;
+        }
+
+        .owner-card:hover {
+            transform: scale(1.05);
+        }
+
+        .owner-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .owner-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .owner-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .owner-card .overlay h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 767px) {
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+            .about-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Architect Studio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'portfolio' %}">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Page Header -->
+    <section class="about-header text-white py-5" style="background: linear-gradient(135deg, #1e1e2f, #343a40); position: relative; overflow: hidden;">
+        <div class="container text-center animate__animated animate__fadeInDown">
+          <h1 class="display-4 fw-bold mb-3">About Architect Studio</h1>
+          <p class="lead mb-4">We design iconic spaces that inspire creativity, functionality, and innovation.</p>
+          <a href="" class="btn btn-outline-light btn-lg px-4">Discover Our Mission</a>
+        </div>
+      
+        <!-- Decorative circles for animation -->
+        <div class="position-absolute top-0 start-0 translate-middle rounded-circle" style="width: 200px; height: 200px; background: rgba(255,255,255,0.05); animation: float 6s ease-in-out infinite;"></div>
+        <div class="position-absolute bottom-0 end-0 translate-middle rounded-circle" style="width: 300px; height: 300px; background: rgba(255,255,255,0.05); animation: float2 8s ease-in-out infinite;"></div>
+      </section>
+      
+      <!-- Include Animate.css -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+      
+      <!-- Custom Animations -->
+      <style>
+      @keyframes float {
+        0% { transform: translate(-50%, -50%) translateY(0); }
+        50% { transform: translate(-50%, -50%) translateY(-20px); }
+        100% { transform: translate(-50%, -50%) translateY(0); }
+      }
+      
+      @keyframes float2 {
+        0% { transform: translate(50%, 50%) translateY(0); }
+        50% { transform: translate(50%, 50%) translateY(30px); }
+        100% { transform: translate(50%, 50%) translateY(0); }
+      }
+      </style>
+      
+
+    <!-- Info Cards Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 animate__animated animate__fadeInDown">Who We Are</h2>
+      <div class="row g-4 justify-content-center">
+  
+        <!-- Mission Card -->
+        <!-- Mission Section -->
+<section id="mission" class="mission-section py-5" style="background: linear-gradient(135deg, #2c3e50, #bdc3c7);">
+    <div class="container text-center text-white">
+      <h2 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Our Mission</h2>
+      <p class="lead mb-5 animate__animated animate__fadeIn">At Architect Studio, we strive to create spaces that are not just aesthetically pleasing but functional and sustainable, meeting the needs of our clients and the environment.</p>
+  
+      <div class="row justify-content-center">
+        <!-- Mission Card 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card bg-white text-dark rounded-4 shadow-lg p-4 mission-card animate__animated animate__fadeInLeft" style="transition: transform 0.3s ease;">
+            <h5 class="card-title text-center mb-3">Innovative Design</h5>
+            <p class="card-text">We prioritize innovative design that integrates modern architecture principles and sustainability. Our work embodies creativity and excellence.</p>
+          </div>
+        </div>
+  
+        <!-- Mission Card 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card bg-white text-dark rounded-4 shadow-lg p-4 mission-card animate__animated animate__fadeInUp" style="transition: transform 0.3s ease;">
+            <h5 class="card-title text-center mb-3">Sustainable Solutions</h5>
+            <p class="card-text">We believe in creating spaces that respect the environment. Our sustainable design solutions minimize resource consumption while maximizing impact.</p>
+          </div>
+        </div>
+  
+        <!-- Mission Card 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card bg-white text-dark rounded-4 shadow-lg p-4 mission-card animate__animated animate__fadeInRight" style="transition: transform 0.3s ease;">
+            <h5 class="card-title text-center mb-3">Client-Centered Approach</h5>
+            <p class="card-text">Our designs reflect our commitment to understanding our client's needs and delivering exceptional solutions that align with their vision and goals.</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="text-center mt-4">
+        <a href="#contact" class="btn btn-light btn-lg px-4">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Location Section -->
+  <!-- Location Section -->
+<section id="location" class="location-section py-5">
+    <div class="container">
+      <h2 class="display-4 fw-bold text-center mb-4 animate__animated animate__fadeIn">Our Location</h2>
+      <p class="lead text-center mb-5 animate__animated animate__fadeIn animate__delay-1s">We are located in the heart of Sambhajinagar, where creativity and innovation come together to design iconic spaces.</p>
+  
+      <div class="row justify-content-center">
+        <!-- Location Information Card 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-lg rounded animate__animated animate__zoomIn animate__delay-2s">
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Address</h5>
+              <p class="card-text">Architect Studio, 123 Main Street, Sambhajinagar, India</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Location Information Card 2 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-lg rounded animate__animated animate__zoomIn animate__delay-3s">
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Contact</h5>
+              <p class="card-text">Phone: +91 123 456 7890</p>
+              <p class="card-text">Email: contact@architectstudio.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Location Map Text -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-10 text-center animate__animated animate__fadeIn animate__delay-4s">
+          <h3 class="fw-bold">Visit Us</h3>
+          <p class="lead">We're open Monday to Friday, from 9:00 AM to 6:00 PM. Feel free to reach out to us for consultations or walk-ins!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Custom Styles -->
+  <style>
+  /* Location Section Styling */
+  .location-section {
+    background-color: #f8f9fa;
+  }
+  
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .animate__animated {
+    animation-duration: 1.5s;
+  }
+  
+  </style>
+  
+  
+  <!-- Include Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  
+      </div>
+    </div>
+  </section>
+  
+  <!-- Extra CSS inside <style> tag (put in <head> or inline inside <style>) -->
+  <style>
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+    }
+  
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+  
+    .card-title {
+      color: #333;
+      font-weight: 600;
+    }
+  
+    .card-text {
+      font-size: 0.95rem;
+      color: #555;
+    }
+  
+    .btn-dark {
+      transition: background-color 0.3s, transform 0.3s;
+    }
+  
+    .btn-dark:hover {
+      background-color: #222;
+      transform: scale(1.05);
+    }
+  </style>
+  
+  
+  
+
+    <!-- Owner's Profile -->
+    <section id="owner" class="owner section-bg">
+        <div class="container">
+            <h2 class="section-title">Meet the Owner</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="owner-card">
+                        <img src="{% static 'img/owner.jpg' %}" alt="Owner Image" class="img-fluid">
+                        <div class="overlay">
+                            <h4>Rakesh</h4>
+                        </div>
+                    </div>
+                    <div class="owner-profile text-center mt-3">
+                        <h4>Rakesh Shrikhande</h4>
+                        <p>Founder & Chief Architect</p>
+                        <p>With over 5 years of experience, Rakesh leads the team at Architect Studio with a vision to create timeless and sustainable designs that have a lasting impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-3 text-center">
+      <p>Connect with us:
+          <a href="#" class="text-white mx-2">Instagram</a> |
+          <a href="#" class="text-white mx-2">Facebook</a> |
+          <a href="#" class="text-white mx-2">LinkedIn</a>
+      </p>
+      <p>© 2025 Architect Studio</p>
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

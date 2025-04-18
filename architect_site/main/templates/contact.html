@@ -1,0 +1,426 @@
+<!-- templates/main/home.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Architect Studio | About</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* General Navbar Styles */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            margin-left: 20px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f8f9fa;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Optional scroll background effect */
+        .navbar.scrolled {
+            background-color: #000 !important;
+        }
+
+        /* About Page Styles */
+        .about-header {
+            background: url("{% static 'images/about-header.jpg' %}") no-repeat center center;
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .about-header a {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            background-color: #f8f9fa;
+            color: #333;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .about-header a:hover {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-bg {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        .mission h3, .location h3, .owner h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .mission p, .location p, .owner p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Card Layout for Owner Profile */
+        .owner-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 15px;
+        }
+
+        .owner-card:hover {
+            transform: scale(1.05);
+        }
+
+        .owner-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .owner-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .owner-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .owner-card .overlay h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 767px) {
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+            .about-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Architect Studio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'portfolio' %}">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Page Header -->
+    <section class="about-header text-white py-5" style="background: linear-gradient(135deg, #1e1e2f, #343a40); position: relative; overflow: hidden;">
+        <div class="container text-center animate__animated animate__fadeInDown">
+          <h1 class="display-4 fw-bold mb-3">Get in Touch</h1>
+          <p class="lead mb-4">We’d love to hear from you. Let’s start a conversation.</p>
+          
+        </div>
+      
+        <!-- Decorative circles for animation -->
+        <div class="position-absolute top-0 start-0 translate-middle rounded-circle" style="width: 200px; height: 200px; background: rgba(255,255,255,0.05); animation: float 6s ease-in-out infinite;"></div>
+        <div class="position-absolute bottom-0 end-0 translate-middle rounded-circle" style="width: 300px; height: 300px; background: rgba(255,255,255,0.05); animation: float2 8s ease-in-out infinite;"></div>
+      </section>
+      
+      <!-- Include Animate.css -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+      
+      <!-- Custom Animations -->
+      <style>
+      @keyframes float {
+        0% { transform: translate(-50%, -50%) translateY(0); }
+        50% { transform: translate(-50%, -50%) translateY(-20px); }
+        100% { transform: translate(-50%, -50%) translateY(0); }
+      }
+      
+      @keyframes float2 {
+        0% { transform: translate(50%, 50%) translateY(0); }
+        50% { transform: translate(50%, 50%) translateY(30px); }
+        100% { transform: translate(50%, 50%) translateY(0); }
+      }
+      </style>
+
+  
+  
+
+<!-- Contact Info Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100 animate__animated animate__fadeInUp">
+          <h5 class="fw-bold mb-2">Our Office</h5>
+          <p class="mb-0">Architect Studio<br>Sambhajinagar, Maharashtra, India</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+          <h5 class="fw-bold mb-2">Phone</h5>
+          <p class="mb-0">+91 98765 43210</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+          <h5 class="fw-bold mb-2">Email</h5>
+          <p class="mb-0">info@architectstudio.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4" style="font-family: 'Lato', sans-serif; font-size: 2rem;">Frequently Asked Questions</h2>
+        <p class="text-center text-muted mb-5" style="font-family: 'Lato', sans-serif; font-size: 1rem;">Find answers to your questions about our services and solutions.</p>
+        
+        <div class="accordion" id="faqAccordion">
+            <!-- FAQ 1 -->
+            <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" ondblclick="toggleAnswer('collapseOne')">
+                        <strong>How do I get started with your services?</strong>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Simply reach out to us through our contact page, and we will guide you through the process. Our team will assess your needs and suggest a tailored plan.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ondblclick="toggleAnswer('collapseTwo')">
+                        <strong>What are the types of design services you offer?</strong>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        We offer a variety of design services, including residential and commercial building design, landscape design, interior design, and custom architectural planning.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" ondblclick="toggleAnswer('collapseThree')">
+                        <strong>How long does it take to complete a design project?</strong>
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        The timeline depends on the complexity of the project. Typically, it takes 4-6 weeks for initial design concepts, followed by review and revisions. For more extensive projects, timelines may vary.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" ondblclick="toggleAnswer('collapseFour')">
+                        <strong>Do you offer 3D modeling and visualization?</strong>
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes, we offer 3D modeling and visualization services. We use advanced tools to bring your project to life with realistic renders and walkthroughs before construction begins.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="accordion-item mb-3 shadow-sm border-0 rounded">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" ondblclick="toggleAnswer('collapseFive')">
+                        <strong>Can I customize the design according to my preferences?</strong>
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Absolutely! We prioritize your vision. We work closely with you to understand your preferences and incorporate them into the design while ensuring functionality and aesthetic balance.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JS and Dependencies (for Accordion) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
+
+<!-- Custom JS to close the accordion on double click -->
+<script>
+    function toggleAnswer(id) {
+        const target = document.getElementById(id);
+        // Toggle visibility of the answer on double-click
+        if (target.classList.contains('show')) {
+            target.classList.remove('show');
+        } else {
+            target.classList.add('show');
+        }
+    }
+</script>
+
+<!-- Add this CSS to remove blue highlight and ensure smooth fonts -->
+<style>
+    .accordion-button {
+        outline: none; /* Remove blue outline */
+        font-family: 'Lato', sans-serif; /* Smooth and modern font */
+        font-weight: normal; /* Adjusted font weight */
+        font-size: 1rem;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none; /* Remove focus effect */
+    }
+
+    .accordion-body {
+        font-family: 'Lato', sans-serif;
+        font-size: 0.95rem;
+        color: #333; /* More readable text color */
+    }
+
+    /* For smooth transitions */
+    .accordion-button {
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-3 text-center">
+    <p>Connect with us:
+        <a href="#" class="text-white mx-2">Instagram</a> |
+        <a href="#" class="text-white mx-2">Facebook</a> |
+        <a href="#" class="text-white mx-2">LinkedIn</a>
+    </p>
+    <p>© 2025 Architect Studio</p>
+</footer>
+
+<!-- Optional Animation Keyframes -->
+<style>
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+  100% { transform: translateY(0); }
+}
+@keyframes float2 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

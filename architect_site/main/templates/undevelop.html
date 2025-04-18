@@ -1,0 +1,87 @@
+<!-- templates/main/home.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Architect Studio | About</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+    <style>
+        .navbar {
+          backdrop-filter: blur(10px);
+          background-color: rgba(0, 0, 0, 0.6);
+          transition: background-color 0.3s ease;
+        }
+      
+        .navbar-brand {
+          font-weight: 700;
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+          color: #fff !important;
+        }
+      
+        .navbar-nav .nav-link {
+          color: #fff !important;
+          margin-left: 20px;
+          font-weight: 500;
+          position: relative;
+        }
+      
+        .navbar-nav .nav-link::after {
+          content: "";
+          position: absolute;
+          width: 0%;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #f8f9fa;
+          transition: width 0.3s ease;
+        }
+      
+        .navbar-nav .nav-link:hover::after {
+          width: 100%;
+        }
+      
+        /* Optional scroll background effect */
+        .navbar.scrolled {
+          background-color: #000 !important;
+        }
+      </style>
+      
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">Architect Studio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav" aria-controls="navbarNav"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link active" href="{% url 'Home' %}">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'portfolio' %}">Portfolio</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <br><br><br><br><br><center><h1>Page is Under Development</h1><center><br><br><br><br><br>
+
+    <footer class="bg-dark text-white py-3 text-center">
+        <p>Connect with us:
+            <a href="#" class="text-white mx-2">Instagram</a> |
+            <a href="#" class="text-white mx-2">Facebook</a> |
+            <a href="#" class="text-white mx-2">LinkedIn</a>
+        </p>
+        <p>© 2025 Architect Studio</p>
+    </footer>
+</body>
+</html>

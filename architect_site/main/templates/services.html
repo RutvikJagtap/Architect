@@ -1,0 +1,349 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Architect Studio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .hero-section {
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d') no-repeat center center/cover;
+      color: white;
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .hero-section .btn {
+      margin-top: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .services-section {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+
+    .service-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-section {
+      background-color: #212529;
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+    <style>
+        .navbar {
+          backdrop-filter: blur(10px);
+          background-color: rgba(0, 0, 0, 0.6);
+          transition: background-color 0.3s ease;
+        }
+      
+        .navbar-brand {
+          font-weight: 700;
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+          color: #fff !important;
+        }
+      
+        .navbar-nav .nav-link {
+          color: #fff !important;
+          margin-left: 20px;
+          font-weight: 500;
+          position: relative;
+        }
+      
+        .navbar-nav .nav-link::after {
+          content: "";
+          position: absolute;
+          width: 0%;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #f8f9fa;
+          transition: width 0.3s ease;
+        }
+      
+        .navbar-nav .nav-link:hover::after {
+          width: 100%;
+        }
+      
+        /* Optional scroll background effect */
+        .navbar.scrolled {
+          background-color: #000 !important;
+        }
+      </style>
+      
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">Architect Studio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav" aria-controls="navbarNav"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link active" href="{% url 'Home' %}">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'portfolio' %}">Portfolio</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+  <!-- Hero Section -->
+  <!-- Hero Section -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716'); background-size: cover; background-position: center; height: 60vh; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7);"></div>
+    <div class="hero-content text-center text-white d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 2; position: relative;">
+      <h1 class="display-4 fw-bold text-shadow">Our Architectural Services</h1>
+      <p class="lead mb-4 text-shadow">Delivering stunning and sustainable design solutions</p>
+      <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+    </div>
+  </section>
+  
+
+  <!-- Services Section -->
+  <!-- Services Section -->
+<section class="py-5 bg-light" id="services">
+    <div class="container">
+      <h2 class="text-center mb-5 fw-bold">Our Services</h2>
+      <div class="row g-4">
+  
+        <!-- Card 1: Bungalow Design -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/bunglow.jpg' %}" class="card-img-top" alt="Bungalow Design">
+            </div>
+            <h4 class="mt-3">Bungalow Design</h4>
+            <p>We create bespoke bungalow layouts that blend modern aesthetics with functional spaces.</p>
+          </div>
+        </div>
+  
+        <!-- Card 2: Apartment Design -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/apartment.jpg' %}" class="card-img-top" alt="Apartment Design">
+            </div>
+            <h4 class="mt-3">Apartment Design</h4>
+            <p>Designs that maximize space, light, and luxury in high-density living environments.</p>
+          </div>
+        </div>
+  
+        <!-- Card 3: Interior Design -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/interior.jpg' %}" class="card-img-top" alt="Interior Design">
+            </div>
+            <h4 class="mt-3">Interior Design</h4>
+            <p>Stunning interiors designed to reflect your personality, lifestyle, and needs.</p>
+          </div>
+        </div>
+  
+        <!-- Card 4: Landscape Design -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/landscape.jpg' %}" class="card-img-top" alt="Landscape Design">
+            </div>
+            <h4 class="mt-3">Landscape Design</h4>
+            <p>Innovative outdoor spaces that enhance architecture and embrace nature.</p>
+          </div>
+        </div>
+  
+        <!-- Card 5: Renovation & Restoration -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/renovation.jpg' %}" class="card-img-top" alt="Renovation & Restoration">
+            </div>
+            <h4 class="mt-3">Renovation & Restoration</h4>
+            <p>Modernizing existing structures while preserving their original charm and purpose.</p>
+          </div>
+        </div>
+  
+        <!-- Card 6: Commercial Design -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="card shadow-sm h-100 text-center p-4 service-card">
+            <div class="card-img-wrapper">
+              <img src="{% static 'img/commercial.jpeg' %}" class="card-img-top" alt="Commercial Space Design">
+            </div>
+            <h4 class="mt-3">Commercial Space Design</h4>
+            <p>Functional and visually compelling commercial designs that elevate your brand.</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <!-- Additional CSS to Fix Image and Add Hover Effects -->
+  <style>
+    /* Card Layout */
+    .service-card {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    /* Ensure Image Covers Entire Card */
+    .card-img-wrapper {
+      height: 400px; /* Fixed height for the image wrapper */
+      overflow: hidden;
+    }
+  
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure images cover the area */
+    }
+  
+    /* Hover Effect for Cards */
+    .service-card:hover {
+      transform: translateY(-10px); /* Slight lift effect */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+  
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    /* Heading Style */
+    .service-card h4 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #333;
+    }
+  
+    /* Card Padding & Text Alignment */
+    .service-card .card-body {
+      padding: 1.25rem;
+    }
+  
+    /* Card Text Style */
+    .service-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+  
+  
+ 
+  
+ 
+  
+  
+  <section class="cta-hero-section text-white py-5" style="background: linear-gradient(135deg, #2c2c3a, #444); position: relative; overflow: hidden;">
+    <div class="container text-center animate__animated animate__fadeInUp">
+      <h2 class="display-5 fw-bold mb-3">Let's Build Your Dream Space</h2>
+      <p class="lead mb-4">Elegant. Functional. Timeless. Partner with us to bring your architectural vision to life.</p>
+      <a href="#contact" class="btn btn-outline-light btn-lg px-4">Start Your Project</a>
+    </div>
+  
+    <!-- Decorative circles for animation -->
+    <div class="position-absolute top-0 start-0 translate-middle rounded-circle"
+         style="width: 200px; height: 200px; background: rgba(255,255,255,0.05); animation: float 6s ease-in-out infinite;">
+    </div>
+    <div class="position-absolute bottom-0 end-0 translate-middle rounded-circle"
+         style="width: 300px; height: 300px; background: rgba(255,255,255,0.05); animation: float2 8s ease-in-out infinite;">
+    </div>
+  
+    <style>
+      @keyframes float {
+        0%, 100% {
+          transform: translate(-50%, -50%) translateY(0px);
+        }
+        50% {
+          transform: translate(-50%, -50%) translateY(20px);
+        }
+      }
+  
+      @keyframes float2 {
+        0%, 100% {
+          transform: translate(50%, 50%) translateY(0px);
+        }
+        50% {
+          transform: translate(50%, 50%) translateY(-20px);
+        }
+      }
+    </style>
+  </section>
+
+  <div class="my-5"></div>
+  
+  
+  
+  
+  
+  
+  
+
+ 
+  <footer class="bg-dark text-white py-3 text-center">
+    <p>Connect with us:
+        <a href="#" class="text-white mx-2">Instagram</a> |
+        <a href="#" class="text-white mx-2">Facebook</a> |
+        <a href="#" class="text-white mx-2">LinkedIn</a>
+    </p>
+    <p>© 2025 Architect Studio</p>
+</footer>
+  
+  
+  <!-- At the bottom of your body -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
