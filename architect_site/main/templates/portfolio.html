@@ -1,0 +1,302 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Architect Studio | Portfolio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/i.ico' %}">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* General Navbar Styles */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            margin-left: 20px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f8f9fa;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* About Page Styles */
+        .about-header {
+            background: url("{% static 'images/about-header.jpg' %}") no-repeat center center;
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .about-header a {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            background-color: #f8f9fa;
+            color: #333;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .about-header a:hover {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        /* Portfolio Page Styles */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-title {
+            font-weight: 600;
+        }
+
+        .card-text {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            align-self: start;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 767px) {
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+            .about-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Architect Studio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'portfolio' %}">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Page Header -->
+    <section class="about-header text-white py-5" style="background: linear-gradient(135deg, #1e1e2f, #343a40); position: relative; overflow: hidden;">
+        <div class="container text-center animate__animated animate__fadeInDown">
+          <h1 class="display-4 fw-bold mb-3">Our Architectural Projects</h1>
+          <p class="lead mb-4">We design iconic spaces that inspire creativity, functionality, and innovation.</p>
+          <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Start Your Project</a>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <div class="container py-5">
+        <!-- Filter Dropdown -->
+        <form method="get" class="mb-5 text-center" >
+            <label for="category" class="form-label me-2">Filter by Type:</label>
+            <select name="category" id="category" class="form-select d-inline-block w-auto me-2" style="cursor:pointer">
+                <option value="">All</option>
+                <option value="Bungalow" {% if request.GET.category == "Bungalow" %}selected{% endif %}>Bungalow</option>
+                <option value="Apartment" {% if request.GET.category == "Apartment" %}selected{% endif %}>Apartment</option>
+                <option value="Interior" {% if request.GET.category == "Interior" %}selected{% endif %}>Interior</option>
+                <option value="Renovation" {% if request.GET.category == "Renovation" %}selected{% endif %}>Renovation</option>
+                <option value="Landscape" {% if request.GET.category == "Landscape" %}selected{% endif %}>Landscape</option>
+                <option value="Commercial" {% if request.GET.category == "Commercial" %}selected{% endif %}>Commercial</option>
+            </select>
+            <button type="submit" class="btn btn-dark-grey">Apply</button>
+        </form>
+
+        <!-- Projects Cards -->
+
+        <style>
+        
+            /* Dark Grey Button Style */
+            .btn-dark-grey {
+                align-self: start;
+                background-color: #343a40;
+                color: #fff;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+            
+            .btn-dark-grey:hover {
+                background-color:rgb(97, 99, 101); /* Light grey */
+                color: #000;
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }            
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #ffffff;
+    cursor:pointer;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    align-self: start;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
+    z-index: 1;
+}
+
+.card:hover::before {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+
+        </style>
+
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm animate__animated animate__fadeInUp" data-aos="fade-up">
+                    <img src="data:image/jpeg;base64,{{ project.render }}" class="card-img-top" alt="Project Image">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title project-title">{{ project.name }}</h5>
+                        <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                        <a href="#" class="btn btn-dark-grey mt-auto">View Details</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 text-center">
+        <p>Connect with us:
+            <a href="#" class="text-white mx-2">Instagram</a> |
+            <a href="#" class="text-white mx-2">Facebook</a> |
+            <a href="#" class="text-white mx-2">LinkedIn</a>
+        </p>
+        <p>© 2025 Architect Studio</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
